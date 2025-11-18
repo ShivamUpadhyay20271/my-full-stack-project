@@ -28,7 +28,7 @@ export default function RegisterPage() {
           localStorage.setItem('token', data.token)
           localStorage.setItem('user', JSON.stringify({id: data.id, username: data.username, firstName: data.firstName, lastName: data.lastName}))
           alert('Registration successful!')
-          window.location.href = '/dashboard'
+          window.location.href = '/profile'
         } else {
           alert(data.error || 'Registration failed')
         }
