@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const app = express();
 
+// comment
+
 const JWT_SECRET = "this is my jwt scrtj"
 
 app.use(cors())
