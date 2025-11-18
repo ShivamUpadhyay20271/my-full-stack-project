@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 
 export default function RegisterPage() {
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -11,24 +13,29 @@ export default function RegisterPage() {
       alert('Passwords do not match!')
       return
     }
-    
 
-    // call backend api at http://localhost:3000/auth/register with body as { username, password }
+    // call backend api at http://localhost:3000/auth/register with body as { firstName, lastName, username, password }
     fetch('http://localhost:3000/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ firstname: firstName, lastname: lastName, username, password })
 
     }).then(res => res.json())
       .then(data => {
         if(data.token) {
           localStorage.setItem('token', data.token)
-          localStorage.setItem('user', JSON.stringify({id: data.id, username: data.username}))
+          localStorage.setItem('user', JSON.stringify({id: data.id, username: data.username, firstName: data.firstName, lastName: data.lastName}))
           alert('Registration successful!')
           window.location.href = '/dashboard'
+        } else {
+          alert(data.error || 'Registration failed')
         }
+      })
+      .catch(err => {
+        console.error('Error during registration:', err)
+        alert('An error occurred. Please try again later.')
       })
   }
 
@@ -38,6 +45,32 @@ export default function RegisterPage() {
         <h1 className="text-3xl font-bold text-blue-600 text-center mb-8">Create Account</h1>
         
         <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">First Name</label>
+              <input
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="Enter first name"
+                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
+              <input
+                type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder="Enter last name"
+                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition"
+                required
+              />
+            </div>
+          </div>
+
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">Username</label>
             <input
