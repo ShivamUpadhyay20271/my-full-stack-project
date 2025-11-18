@@ -1,3 +1,6 @@
+const dotenv = require('dotenv')
+dotenv.config();
+
 const express = require('express')
 const cors = require('cors')
 const bcrypt = require('bcrypt')
@@ -6,7 +9,7 @@ const app = express();
 
 // comment
 
-const JWT_SECRET = "this is my jwt scrtj"
+const JWT_SECRET = process.env.JWT_SECRET
 
 app.use(cors())
 app.use(express.json());
