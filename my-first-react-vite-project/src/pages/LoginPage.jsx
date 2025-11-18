@@ -8,7 +8,7 @@ export default function LoginPage() {
     e.preventDefault()
 
     // call backend api at http://localhost:3000/auth/login with body as { username, password }
-    fetch('http://localhost:3000/auth/login', {
+    fetch('https://my-full-stack-project-6d9e.onrender.com/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -21,7 +21,7 @@ export default function LoginPage() {
           localStorage.setItem('token', data.token)
           localStorage.setItem('user', JSON.stringify({ id: data.id, username: data.username }))
           alert('Login successful!')
-          window.location.href = '/dashboard'
+          window.location.href = '/profile'
         } else {
           alert(data.error || 'Login failed. Invalid username or password.')
         }

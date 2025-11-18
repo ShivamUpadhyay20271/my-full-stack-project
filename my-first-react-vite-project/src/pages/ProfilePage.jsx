@@ -32,7 +32,7 @@ export default function ProfilePage() {
     const token = localStorage.getItem('token')
 
     // call backend api to update user profile
-    fetch('http://localhost:3000/auth/update-profile', {
+    fetch('https://my-full-stack-project-6d9e.onrender.com/auth/update-profile', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

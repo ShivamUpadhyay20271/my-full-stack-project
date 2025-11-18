@@ -15,7 +15,7 @@ export default function RegisterPage() {
     }
 
     // call backend api at http://localhost:3000/auth/register with body as { firstName, lastName, username, password }
-    fetch('http://localhost:3000/auth/register', {
+    fetch('https://my-full-stack-project-6d9e.onrender.com/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
